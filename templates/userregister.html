@@ -79,31 +79,24 @@ legend.scheduler-border {
 </style>
 <body id="main">
 <a href="home.html" ><h1 id="heading">BANK WITH US!</h1></a>
-    
-    <div id="loginbox" class="container-fluid" style="margin-top: 2.5cm;">
-    <div class="row">
-        <div class="offset-4 col-4">
-          <fieldset class="scheduler-border">
-            <legend class="scheduler-border">User login</legend>
+<div class="row">
+    <div class="offset-1 col-2">
             <div class="control-group">
-            <form action="ulogin.php" method="post">
-                <label class="control-label input-label" for="email"><i class="fa fa-envelope"></i>    E-mail :</label><br>
-                    <input type="email" name="email" placeholder="abc@gmail.com" /><br><br>
-                    <label class="control-label input-label" for="pass"><i class="fa fa-key"></i>    Password :</label><br>
-                    <input type="password" name="password" /> <br><br>
+            <form action="userregister.html" method="post">
+                <label class="control-label input-label" for="SSN"><i class="fa fa-envelope"></i>    Social Security number :</label><br>
+                    <input type="number" name="SSN" placeholder="111223333" /><br><br>
+                    <label class="control-label input-label" for="Name"><i class="fa fa-key"></i>    Name :</label><br>
+                    <input type="text" name="Name" /> <br><br>
+                    <label class="control-label input-label" for="Branch"><i class="fa fa-key"></i>    Branch ID :</label><br>
+                    <input type="text" name="Branch" /> <br><br>
+                    <label class="control-label input-label" for="Password"><i class="fa fa-key"></i>    Password :</label><br>
+                    <input type="password" name="Password" /> <br><br>
                     <input class="btn btn-primary" type="submit" value="Submit"><br>
-                    </form>
-                    <div class="signup" style="margin-left: 2.5cm;">
-                      new user?<a href="userregister.html"> click here to register</a>
-                    </div>
-
-                   
+            </form>
+                                    
              
             </div>
-        </fieldset>
-    </div>
+        </div>
 </div>
-    </div>
-
     </body>
     </html>
