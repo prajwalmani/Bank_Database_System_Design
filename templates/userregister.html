@@ -82,33 +82,17 @@ legend.scheduler-border {
 <div class="row">
     <div class="offset-1 col-2">
             <div class="control-group">
-            <form method="post">
+            <form action="userregister.html" method="post">
                 <label class="control-label input-label" for="SSN"><i class="fa fa-envelope"></i>    Social Security number :</label><br>
                     <input type="number" name="SSN" placeholder="111223333" /><br><br>
                     <label class="control-label input-label" for="Name"><i class="fa fa-key"></i>    Name :</label><br>
                     <input type="text" name="Name" /> <br><br>
                     <label class="control-label input-label" for="Branch"><i class="fa fa-key"></i>    Branch ID :</label><br>
                     <input type="text" name="Branch" /> <br><br>
-                    <label class="control-label input-label" for="email"><i class="fa fa-envelope"></i>    E-mail :</label><br>
-                    <input type="email" name="email" placeholder="abc@gmail.com" /><br><br>
                     <label class="control-label input-label" for="Password"><i class="fa fa-key"></i>    Password :</label><br>
                     <input type="password" name="Password" /> <br><br>
-                    <label class="control-label input-label" for="RePassword"><i class="fa fa-key"></i>    Re Enter thr Password :</label><br>
-                    <input type="password" name="RePassword" /> <br><br>
                     <input class="btn btn-primary" type="submit" value="Submit"><br>
             </form>
-            {% block content %}
-<div class="container">
-    {% for message in get_flashed_messages() %}
-    <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{ message }}
-    </div>
-    {% endfor %}
-
-    {% block page_content %}{% endblock %}
-</div>
-{% endblock %}
                                     
              
             </div>
