@@ -21,24 +21,29 @@ def auth():
     email=request.form['email']
     password=request.form['password']
 
-    sql="SELECT * FROM `auth`;"
+    sql="SELECT * FROM `userauth`;"
 
     cursor.execute(sql)
     rows=cursor.fetchall()
     for row in rows:
         if email==row[0] and password==row[1]:
-            print("successfull")
-        #     return "successful"
-    
-    return "not found!"
+                return render_template("accountsdisp.html")
+    else:
+        flash("Wrong credentials! Try again... ")
+        return  render_template("home.html")
 
-@app.route('/userregister',methods=['GET', 'POST'])
+@app.route('/userregister.html',methods=['GET', 'POST'])
 def userregister():
     if request.method == 'POST':
         ssn=request.form['SSN']
         branchid=request.form['Branch']
         password=request.form['Password']
-        repassword=request.form['RePassword']
+        repassword=request.form['CPassword']
+        if ssn=='' or branchid=='' or password=='' or repassword=='':
+            flash("All the fields should be filled")
+            return render_template("userregister.html")
+
+
         if password!=repassword:
             flash("Passwords dont match!.")
             return render_template("userregister.html")
