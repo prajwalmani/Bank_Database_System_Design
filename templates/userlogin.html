@@ -88,17 +88,31 @@ legend.scheduler-border {
           <fieldset class="scheduler-border">
             <legend class="scheduler-border">User login</legend>
             <div class="control-group">
-            <form action="ulogin.php" method="post">
+            <form method="post">
                 <label class="control-label input-label" for="email"><i class="fa fa-envelope"></i>    E-mail :</label><br>
                     <input type="email" name="email" placeholder="abc@gmail.com" /><br><br>
                     <label class="control-label input-label" for="pass"><i class="fa fa-key"></i>    Password :</label><br>
                     <input type="password" name="password" /> <br><br>
+                    {% block content %}
+                    <div class="container">
+                        {% for message in get_flashed_messages() %}
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <span type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span></span>
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    
+                        {% block page_content %}{% endblock %}
+                    </div>
+                    {% endblock %}
                     <input class="btn btn-primary" type="submit" value="Submit"><br>
                     </form>
                     <div class="signup" style="margin-left: 2.5cm;">
-                      new user?<a href="userregister.html"> click here to register</a>
+                      new user?<a href="employeeregister.html"> click here to register</a>
                     </div>
 
+                    
                    
              
             </div>
