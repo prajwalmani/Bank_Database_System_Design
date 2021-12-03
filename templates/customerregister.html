@@ -83,6 +83,11 @@ legend.scheduler-border {
     <div class="offset-1 col-2">
             <div class="control-group">
             <form method="post">
+<<<<<<< HEAD:templates/customerregister.html
+=======
+                <label class="control-label input-label" for="SSN"><i class="fa fa-envelope"></i>    Social Security number :</label><br>
+                    <input type="number" name="SSN" placeholder="111223333" /><br><br>
+>>>>>>> bd8f2e7a4e4a8e666a27fd8ba6a23c167388e96d:templates/employeeregister.html
                     <label class="control-label input-label" for="Name"><i class="fa fa-key"></i>    Name :</label><br>
                     <input type="text" name="Name" required/> <br><br>
                     <label class="control-label input-label" for="SSN"><i class="fa fa-envelope"></i>    Social Security number :</label><br>
@@ -90,10 +95,16 @@ legend.scheduler-border {
                     <label class="control-label input-label" for="email"><i class="fa fa-envelope"></i>    E-mail :</label><br>
                     <input type="email" name="email" placeholder="abc@gmail.com" /><br><br>
                     <label class="control-label input-label" for="Password"><i class="fa fa-key"></i>    Password :</label><br>
+<<<<<<< HEAD:templates/customerregister.html
                     <input type="password" name="Password" required /> <br><br>
                     <label class="control-label input-label" for="RePassword"><i class="fa fa-key"></i>   Confirm Password :</label><br>
                     <input type="password" name="CPassword" required /> <br><br>
                     
+=======
+                    <input type="password" name="Password" /> <br><br>
+                    <label class="control-label input-label" for="RePassword"><i class="fa fa-key"></i>   Confirm Password :</label><br>
+                    <input type="password" name="CPassword" /> <br><br>
+>>>>>>> bd8f2e7a4e4a8e666a27fd8ba6a23c167388e96d:templates/employeeregister.html
                     {% block content %}
                     <div class="container">
                         {% for message in get_flashed_messages() %}
