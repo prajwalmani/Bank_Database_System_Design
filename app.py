@@ -3,6 +3,7 @@ from flask.templating import render_template_string
 from flask.wrappers import Request
 import pymysql
 from pymysql import ROWID, cursors
+import json
 
 app = Flask(__name__)
 
@@ -11,6 +12,8 @@ app.secret_key = "super secret key"
 
 connection =pymysql.connect(host="localhost",user="root",passwd="",database="bank")
 cursor=connection.cursor()
+
+global_ssn=[]
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -36,7 +39,8 @@ def customerauth():
         rows=cursor.fetchall()
         for row in rows:
             if email==row[0] and password==row[1]:
-                    return render_template("customeraccountsdisp.html")
+                    global_ssn.append(row[2])
+                    return redirect(url_for('customeraccountsdisp'))
         else:
             flash("Wrong credentials! Try again... ")
             return  render_template("customerlogin.html")
@@ -111,9 +115,39 @@ def customerregister():
 
 
 
-@app.route('/accountsdisp.html',methods=['POST','GET'])
-def accountsdisp():
-    pass
+@app.route('/customeraccountsdisp.html',methods=['POST','GET'])
+def customeraccountsdisp():
+    ssn=global_ssn[-1]
+    sql='select account,balance,last_accessed_date,account_type from `account`where cssn={0};'.format(ssn)
+    cursor.execute(sql)
+    rows=cursor.fetchall()
+    jsondata={}
+    for row in rows:
+        account_type=row[3]
+        if account_type=='s':
+            account=row[0]
+            savings_sql="select * from `savings` where savingsaccount={0};".format(account)
+            cursor.execute(savings_sql)
+            rows=cursor.fetchall()
+            for row in rows:
+                print("here")
+                buff_dict={
+                    "s":{
+                        "savingsaccount":row[0],
+                        "last_accessed_data":row[1],
+                        "savings_interset_rate":row[2]
+                    }
+                }
+                jsondata.update(buff_dict)
+            print(jsondata)
+        if account_type=='l':
+            loan_account=row[0]
+        if account_type=='c':
+            checking_account=row[0]
+        if account_type=='m':
+            money_market_account=row[0]
+        
+    return render_template("customeraccountsdisp.html",data=jsondata)
 
 @app.route('/employee')
 def employee():
