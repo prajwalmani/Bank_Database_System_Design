@@ -18,9 +18,9 @@ def home():
         customerbutton=request.form.get('customerbutton')
         employeebutton=request.form.get('employeebutton')
         if customerbutton=='cb':
-            return render_template('customerlogin.html')
+            return redirect(url_for("customerauth"))
         elif employeebutton=='eb':
-            return render_template('employeelogin.html')
+            return redirect(url_for("employeeauth"))
         else:
             pass
     return render_template('home.html')
@@ -40,6 +40,7 @@ def customerauth():
         else:
             flash("Wrong credentials! Try again... ")
             return  render_template("customerlogin.html")
+    return render_template("customerlogin.html")
 
 @app.route("/employeelogin.html",methods=['GET',"POST"])
 def employeeauth():
@@ -56,7 +57,7 @@ def employeeauth():
         else:
             flash("Wrong credentials! Try again... ")
             return  render_template("employeelogin.html")
-    
+    return  render_template("employeelogin.html")
 
 @app.route('/employeeregister.html',methods=['GET', 'POST'])
 def employeeregister():
