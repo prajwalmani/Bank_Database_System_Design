@@ -9,7 +9,7 @@
 </head>
 <style>
 body{
-  background-image: url('https://wallpaperaccess.com/full/1393189.jpg');
+  background-image: url('https://img.wallpapersafari.com/desktop/1680/1050/42/12/w3xlib.jpg');
   background-size: cover;
   background-repeat: no-repeat;
    background-color: rgb(220, 227, 230);
@@ -18,6 +18,8 @@ body{
     background-color: transparent;
     padding:30px 20px 30px 20px;
     color: darkblue;
+    filter: blur(8px);
+  -webkit-filter: blur(8px);
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-style: oblique;
     letter-spacing: 1.5px;
@@ -61,11 +63,25 @@ legend.scheduler-border {
 }
 
 
-
+.navbar-nav {
+      flex-direction: row;
+    }
+    
+    .nav-link1 {
+      color:white;
+      padding-right: .5rem !important;
+      padding-left: .5rem !important;
+    }
+    
+    /* Fixes dropdown menus placed on the right side */
+    .ml-auto .dropdown-menu {
+      left: auto !important;
+      right: 0px;
+    }
 </style>
 <body id="main">
 <a href="home.html" ><h1 id="heading">BANK WITH US!</h1></a>
-    
+
     <div id="loginbox" class="container-fluid" style="margin-top: 2.5cm;">
     <div class="row">
         <div class="offset-4 col-4">

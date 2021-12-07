@@ -187,9 +187,10 @@ def customeraccountsdisp():
         
     return render_template("customeraccountsdisp.html",data=jsondata)
 
-@app.route('/employee')
-def employee():
-    return "Success"
+@app.route('/contactus.html')
+def contactus():
+    return render_template("contactus.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
