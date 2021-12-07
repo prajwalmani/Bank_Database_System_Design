@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2021 at 05:41 PM
+-- Generation Time: Dec 07, 2021 at 05:59 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -67,6 +67,33 @@ INSERT INTO `auth` (`email`, `password`, `SSN`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `branch`
+--
+
+CREATE TABLE `branch` (
+  `branchid` int(10) NOT NULL,
+  `bname` varchar(50) NOT NULL,
+  `address` text NOT NULL,
+  `manager` varchar(50) NOT NULL,
+  `asstmanager` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `checking`
+--
+
+CREATE TABLE `checking` (
+  `checkingaccount#` varchar(50) NOT NULL,
+  `overdrafted_amount` varchar(50) NOT NULL,
+  `overdrafted_account` varchar(50) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `customer`
 --
 
@@ -115,6 +142,32 @@ INSERT INTO `employee` (`ESSN`, `Name`, `Phone`, `Start_date`, `Length_of_employ
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `loan`
+--
+
+CREATE TABLE `loan` (
+  `loan#` varchar(50) NOT NULL,
+  `Amount` int(50) NOT NULL,
+  `Repayment_amount` int(50) NOT NULL,
+  `interset_rate` int(5) NOT NULL DEFAULT 0,
+  `account#` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `moneymarket`
+--
+
+CREATE TABLE `moneymarket` (
+  `marketaccount#` varchar(50) NOT NULL,
+  `updated_date` date NOT NULL,
+  `market_interset_rate` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `savings`
 --
 
@@ -130,6 +183,34 @@ CREATE TABLE `savings` (
 
 INSERT INTO `savings` (`savingsaccount`, `last_accessed_data`, `savings_interset_rate`) VALUES
 ('1', '2021-12-05', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transcation`
+--
+
+CREATE TABLE `transcation` (
+  `transactionid` varchar(50) NOT NULL,
+  `tname` varchar(50) NOT NULL,
+  `taccount` varchar(50) NOT NULL,
+  `date` date NOT NULL,
+  `fees` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transct`
+--
+
+CREATE TABLE `transct` (
+  `transactionid` varchar(50) NOT NULL,
+  `account#` varchar(50) NOT NULL,
+  `type` varchar(10) NOT NULL,
+  `amount` int(50) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -148,6 +229,18 @@ ALTER TABLE `auth`
   ADD PRIMARY KEY (`email`);
 
 --
+-- Indexes for table `branch`
+--
+ALTER TABLE `branch`
+  ADD PRIMARY KEY (`branchid`);
+
+--
+-- Indexes for table `checking`
+--
+ALTER TABLE `checking`
+  ADD PRIMARY KEY (`checkingaccount#`);
+
+--
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
@@ -159,6 +252,30 @@ ALTER TABLE `customer`
 ALTER TABLE `employee`
   ADD PRIMARY KEY (`ESSN`),
   ADD UNIQUE KEY `Phone` (`Phone`);
+
+--
+-- Indexes for table `loan`
+--
+ALTER TABLE `loan`
+  ADD PRIMARY KEY (`loan#`);
+
+--
+-- Indexes for table `moneymarket`
+--
+ALTER TABLE `moneymarket`
+  ADD PRIMARY KEY (`marketaccount#`);
+
+--
+-- Indexes for table `transcation`
+--
+ALTER TABLE `transcation`
+  ADD PRIMARY KEY (`transactionid`);
+
+--
+-- Indexes for table `transct`
+--
+ALTER TABLE `transct`
+  ADD PRIMARY KEY (`transactionid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
