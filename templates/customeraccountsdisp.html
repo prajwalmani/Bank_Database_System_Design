@@ -149,72 +149,6 @@ legend.scheduler-border {
 
 
 <body id="main">
-<!-- <h1 id="heading">BANK WITH US!</h1>
-    <div class="row">
-        <div class="offset-4 col-4">
-               
-
-            <div id="popup1" class="overlay">
-                <div class="popup">
-                    <h2>Account details</h2>
-                    <a class="close" href="#">&times;</a>
-                    <div class="content">
-                        Click here to see the transactions
-                    </div>
-                </div>
-            </div>
-
-
-        <h2>YOUR ACCOUNTS</h2>
-          <fieldset class="scheduler-border">
-           
-            <legend class="scheduler-border">Saving Account</legend>
-            <a  href="#popup1">
-            <div class="control-group">
-            SAVINGS:<br>
-            1111 2222 3333<br>
-            BALANCE: $5000
-            </div>
-            </a>
-        </fieldset>
-        <br>
-        <fieldset class="scheduler-border">
-            
-            <legend class="scheduler-border">Checking Account</legend>
-            <a  href="#popup1">
-            <div class="control-group">
-            Account Number  :<br>
-            1111 2222 3333<br>
-            BALANCE: $5000
-            </div>
-        </a>
-            
-        </fieldset>
-        <br>
-        <fieldset class="scheduler-border">
-            <legend class="scheduler-border">Loan Account</legend>
-            <a  href="#popup1">
-            <div class="control-group">
-            Account Number  :<br>
-            1111 2222 3333<br>
-            BALANCE: $5000
-            </div>
-        </a>
-        </fieldset>
-        <br>
-        <fieldset class="scheduler-border">
-                        <legend class="scheduler-border">Money Market Account</legend>
-                        <a  href="#popup1"></a>
-            <div class="control-group">
-            Account Number  :<br>
-            1111 2222 3333<br>
-            BALANCE: $5000
-            </div>
-        </a>
-        </fieldset>
-    </div>
-</div>
-    </div> -->
     <div id="blocks">
       <h1>Your Accounts</h1>
     </div>
@@ -230,16 +164,73 @@ legend.scheduler-border {
         <fieldset class="scheduler-border">
            
            <legend class="scheduler-border">Saving Account</legend>
-           <a  href="#popup1">
            <div class="control-group">
            Account number :`+savingaccountnumber+`<br>
            Last accessed :`+last_accessed_data+`<br>
            Interset Rate:`+'0.01%'+`<br>
            </div>
-           </a>
+           
        </fieldset>
         `;
         document.getElementById('blocks').innerHTML+=savingshtml;
+      }
+      else if(("l" in jsondata)==true){
+        var loanaccount=String(jsondata.l.loanaccount);
+        var amount=String(jsondata.l.amount);
+        var repaymentamount=String(jsondata.l.repaymentamount);
+        var interesetrate=String(jsondata.l.interesetrate);
+        var account=String(jsondata.l.account);
+        var loanhtml=`
+        <fieldset class="scheduler-border">
+           
+           <legend class="scheduler-border">Loan Account</legend>
+           <div class="control-group">
+           Loan Account number :`+loanaccount+`<br>
+           Amount :`+amount+`<br>
+           Repayment Amount :`+repaymentamount+`<br>
+           Interset Rate:`+'9%'+`<br>
+           Account :`+account+`<br>
+           </div>
+           
+       </fieldset>`
+       document.getElementById('blocks').innerHTML+=loanhtml;
+      }
+      else if(("c " in jsondata)==true){
+        var checkingaccount=String(jsondata.c.checkingaccount);
+        var overdraftedamount=String(jsondata.c.overdraftedamount);
+        var overdraftedaccount=String(jsondata.c.overdraftedaccount);
+        var date=String(jsondata.c.date);
+        var checkinghtml=`
+        <fieldset class="scheduler-border">
+           
+           <legend class="scheduler-border">Checking Account</legend>
+           <div class="control-group">
+           Account number :`+checkingaccount+`<br>
+           Overdrafted Amount :`+overdraftedamount+`<br>
+           Overdrafted Account:`+overdraftedaccount+`<br>
+           Date :`+date+`<br>
+           </div>
+           
+       </fieldset>`
+       document.getElementById('blocks').innerHTML+=checkinghtml;
+      
+      }
+      else if (("m " in jsondata)==true){
+          var marketaccount=String(jsondata.m.marketaccount);
+          var updateddate=String(jsondata.m.updateddate);
+          var marketinterestrate=String(jsondata.m.marketinterestrate);;
+          var moneyhtml=`
+        <fieldset class="scheduler-border">
+           
+           <legend class="scheduler-border">Money Market Account</legend>
+           <div class="control-group">
+           Account number :`+marketaccount+`<br>
+          Updated Date:`+updateddate+`<br>
+           Interset Rate:`+'0.5%'+`<br>
+           </div>
+           
+       </fieldset>`
+       document.getElementById('blocks').innerHTML+=moneyhtml;
       }
       else{
         document.getElementById('blocks').innerHTML="<h1>Oops!.. We couldn't find any accounts linked to your email id<h1>";

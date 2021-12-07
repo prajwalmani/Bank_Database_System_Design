@@ -123,8 +123,8 @@ def customeraccountsdisp():
     for row in rows:
         account_type=row[3]
         if account_type=='s':
-            account=row[0]
-            savings_sql="select * from `savings` where savingsaccount={0};".format(account)
+            savings_account=row[0]
+            savings_sql="select * from `savings` where savingsaccount={0};".format(savings_account)
             cursor.execute(savings_sql)
             rows=cursor.fetchall()
             for row in rows:
@@ -136,22 +136,54 @@ def customeraccountsdisp():
                     }
                 }
                 jsondata.update(buff_dict)
-            print(jsondata)
 
         if account_type=='l':
             loan_account=row[0]
-            buff_dict={}
-            jsondata.update(buff_dict)
+            loan_sql="SELECT * FROM `loan` where loan#={0};".format(loan_account)
+            cursor.execute(loan_sql)
+            rows=cursor.fetchall()
+            for row in rows:
+                buff_dict={
+                    "l":{
+                        "loanaccount":row[0],
+                        "amount":row[1],
+                        "repaymentamount":row[2],
+                        "interesetrate":row[3],
+                        "account":row[4]
+                    }
+                }
+                jsondata.update(buff_dict)
 
         if account_type=='c':
             checking_account=row[0]
-            buff_dict={}
-            jsondata.update(buff_dict)
+            checkingsql="SELECT * FROM `checking` where checkingaccount={0}".format(checking_account)
+            cursor.execute(checkingsql)
+            rows=cursor.fetchall()
+            for row in rows:
+                buff_dict={
+                    "c":{
+                        "checkingaccount":row[0],
+                        "overdraftedamount":row[1],
+                        "overdraftedaccount":row[2],
+                        "date":row[3]
+                    }
+                }
+                jsondata.update(buff_dict)
 
         if account_type=='m':
             money_market_account=row[0]
-            buff_dict={}
-            jsondata.update(buff_dict)
+            money_market_sql="SELECT * FROM `moneymarket` where marketaccount={0}".format(money_market_account)
+            cursor.execute(money_market_sql)
+            rows=cursor.fetchall()
+            for row in rows:
+                buff_dict={
+                    "m":{
+                        "marketaccount":row[0],
+                        "updateddate":row[1],
+                        "marketinterestrate":row[2]
+                    }
+                }
+                jsondata.update(buff_dict)
         
     return render_template("customeraccountsdisp.html",data=jsondata)
 
