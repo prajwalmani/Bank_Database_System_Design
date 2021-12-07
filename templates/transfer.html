@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer</title>
+</head>
+<body>
+        <label for="transcation">Select type of transaction:</label>
+        <select name="dropdown" id="dropdown">
+            <option value="cd">Cheque deposit</option>
+            <option value="wm">withdraw money</option>
+            <option value="csd">Cash deposit</option>
+          </select>
+          <button type="submit" id="sumbitbtn" onclick="onclicks();" >Submit</button>
+          <br><br>
+ <div id="dv">
+
+ </div>
+    <script>
+        function onclicks(){
+     var sel=document.getElementById("dropdown");
+         if(sel.options[sel.selectedIndex].value=='cd'){
+            var cdhtml=`
+            <form method="post">
+    <label>Account No:</label>
+    <input type="text" name="toccountno" required/>
+    <label>Branch Id:</label>
+    <input type="number" name="tobranchid" required/>
+    <label>Amount:</label>
+    <input type="number" name="fromamount" required/>
+    <input class="btn btn-primary" type="submit" value="Submit"><br>
+</form>
+            `;
+            document.getElementById('dv').innerHTML+=cdhtml;
+         }
+         else if(sel.options[sel.selectedIndex].value=='wm'){
+             var wmhtml=`
+             <form method="post">
+    <label for="transcation">Select type of Account:</label>
+        <select name="adropdown" id="adropdown" required>
+            <option value="s">Savings Account</option>
+            <option value="c">Checking Account</option>
+          </select>
+          <br><br>
+    <label>Enter the amount:</label>
+    <input type="number" name="amount" required/>
+    <label >Enter the note(optional)</label>
+    <input type="text" name="" id=""/>
+</form>
+             `;
+             document.getElementById('dv').innerHTML=wmhtml;
+
+}
+        else if(drop.selectedIndex=='csd'){
+
+        }
+        else{
+
+        }
+    }
+         </script>
+</body>
+</html>
