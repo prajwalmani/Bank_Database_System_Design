@@ -215,10 +215,35 @@ legend.scheduler-border {
     </div>
 </div>
     </div> -->
-    <p>Hello, <span id="username"></span></p>
+    <div id="blocks">
+      <h1>Your Accounts</h1>
+    </div>
+    
     <script>
-      var user = JSON.parse('{{ data | tojson | safe}}')
-      document.getElementById('username').innerHTML=user.s.last_accessed_data;
+      var jsondata = JSON.parse('{{ data | tojson | safe}}')
+      var blocks=document.getElementById('blocks').innerHTML;
+      if (("s" in jsondata)==true){
+        var savingaccountnumber=String(jsondata.s.savingsaccount);
+        var last_accessed_data=String(jsondata.s.last_accessed_data);
+        var savings_interset_rate=String(jsondata.s.savings_interset_rate);
+        var savingshtml=`
+        <fieldset class="scheduler-border">
+           
+           <legend class="scheduler-border">Saving Account</legend>
+           <a  href="#popup1">
+           <div class="control-group">
+           Account number :`+savingaccountnumber+`<br>
+           Last accessed :`+last_accessed_data+`<br>
+           Interset Rate:`+'0.01%'+`<br>
+           </div>
+           </a>
+       </fieldset>
+        `;
+        document.getElementById('blocks').innerHTML+=savingshtml;
+      }
+      else{
+        document.getElementById('blocks').innerHTML="<h1>Oops!.. We couldn't find any accounts linked to your email id<h1>";
+      }
 
     </script>
     </body>

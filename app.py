@@ -113,8 +113,6 @@ def customerregister():
     return render_template("customerregister.html")
 
 
-
-
 @app.route('/customeraccountsdisp.html',methods=['POST','GET'])
 def customeraccountsdisp():
     ssn=global_ssn[-1]
@@ -130,7 +128,6 @@ def customeraccountsdisp():
             cursor.execute(savings_sql)
             rows=cursor.fetchall()
             for row in rows:
-                print("here")
                 buff_dict={
                     "s":{
                         "savingsaccount":row[0],
@@ -140,12 +137,21 @@ def customeraccountsdisp():
                 }
                 jsondata.update(buff_dict)
             print(jsondata)
+
         if account_type=='l':
             loan_account=row[0]
+            buff_dict={}
+            jsondata.update(buff_dict)
+
         if account_type=='c':
             checking_account=row[0]
+            buff_dict={}
+            jsondata.update(buff_dict)
+
         if account_type=='m':
             money_market_account=row[0]
+            buff_dict={}
+            jsondata.update(buff_dict)
         
     return render_template("customeraccountsdisp.html",data=jsondata)
 
