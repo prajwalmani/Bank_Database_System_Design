@@ -1,12 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    </head>
+    <style>
+    body{
+      background-image: url('https://img.wallpapersafari.com/desktop/1600/900/23/35/E56yMC.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+       background-color: rgb(220, 227, 230);
+       
+    }
+    #heading{
+        background-color: transparent;
+        padding:30px 20px 30px 20px;
+        color: darkblue;
+        font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-style: oblique;
+        letter-spacing: 1.5px;
+        word-spacing: 4px;
+    
+        text-align: center;
+    }
+    
+    
+    
+    #head{
+      color: white;
+    }
+    </style>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transfer</title>
 </head>
-<body>
+<body id="main">
+    
+<a href="home.html" ><h1 id="heading">BANK WITH US!</h1></a>
+<h2 style="text-align: center;">Perform your Transactions here!</h2>
+<br>
+<br>
+    <div class="row">
+        <div class="offset-1 column-2">
         <label for="transcation">Select type of transaction:</label>
         <select name="dropdown" id="dropdown">
             <option value="cd">Cheque deposit</option>
@@ -24,12 +63,12 @@
          if(sel.options[sel.selectedIndex].value=='cd'){
             var cdhtml=`
             <form method="post">
-    <label>Account No:</label>
-    <input type="text" name="toccountno" required/>
-    <label>Branch Id:</label>
-    <input type="number" name="tobranchid" required/>
-    <label>Amount:</label>
-    <input type="number" name="fromamount" required/>
+    <label>Account No:</label><br>
+    <input type="text" name="toccountno" required/><br>
+    <label>Branch Id:</label><br>
+    <input type="number" name="tobranchid" required/><br>
+    <label>Amount:</label><br>
+    <input type="number" name="fromamount" required/><br><br><br>
     <input class="btn btn-primary" type="submit" value="Submit"><br>
 </form>
             `;
@@ -38,16 +77,16 @@
          else if(sel.options[sel.selectedIndex].value=='wm'){
              var wmhtml=`
              <form method="post">
-    <label for="transcation">Select type of Account:</label>
+    <label for="transcation">Select type of Account:</label><br>
         <select name="adropdown" id="adropdown" required>
             <option value="s">Savings Account</option>
             <option value="c">Checking Account</option>
           </select>
           <br><br>
-    <label>Enter the amount:</label>
-    <input type="number" name="amount" required/>
-    <label >Enter the note(optional)</label>
-    <input type="text" name="" id=""/>
+    <label>Enter the amount:</label><br>
+    <input type="number" name="amount" required/><br>
+    <label >Enter the note(optional)</label><br>
+    <input type="text" name="" id=""/><br>
 </form>
              `;
              document.getElementById('dv').innerHTML=wmhtml;
@@ -61,5 +100,7 @@
         }
     }
          </script>
+         </div>
+        </div>
 </body>
 </html>
