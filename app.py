@@ -201,6 +201,50 @@ def contactus():
 def transfer():
     flag=0
     ssn=global_ssn[-1]
+    # cheque deposit 
+    if request.method == 'POST' and "toaccountno" in request.form:
+        toaccountno=request.form['toaccountno']
+        toamount=request.form['toamount']
+        try:
+            sql="select `account`,`balance` from `account` where `cssn`={0}".format(ssn)
+            cursor.execute(sql)
+            rows=cursor.fetchall()
+            for row in rows:
+                balance=int(row[1])-int(toamount)
+                account=row[0]
+                update_sql="""UPDATE `account` 
+                SET `balance`={0}
+                where account={1}""".format(balance,account)
+                cursor.execute(update_sql)
+                connection.commit()
+                insert_quer=("""
+                INSERT INTO `transct` (`transactionid`, `account#`, `type`, `amount`, `time`) VALUES (%s,%s,%s,%s,%s)
+                """)
+                values=(uuid.uuid1(),account,"cd",balance,datetime.datetime.utcnow())
+                cursor.execute(insert_quer,values)
+                connection.commit()
+            sql="select `balance` from `account` where `account`={0}".format(toaccountno)
+            cursor.execute(sql)
+            rows=cursor.fetchall()
+            for row in rows:
+                balance=int(row[0])+int(toamount)
+                update_sql="""UPDATE `account` 
+                SET `balance`={0}
+                where account={1}""".format(balance,toaccountno)
+                cursor.execute(update_sql)
+                connection.commit()
+                insert_quer=("""
+                INSERT INTO `transct` (`transactionid`, `account#`, `type`, `amount`, `time`) VALUES (%s,%s,%s,%s,%s)
+                """)
+                values=(uuid.uuid1(),toaccountno,"cd",balance,datetime.datetime.utcnow())
+                cursor.execute(insert_quer,values)
+                connection.commit()
+                flash("Cheque deposited to Account No:{0} worth of ${1}".format(toaccountno,toamount))
+
+        except:
+            flash("Failure Cheque not deposited!")
+        
+    # cash deposit 
     if request.method == 'POST' and "raccount" in request.form:
         radio_value=request.form['raccount']
         eamount=request.form['eamount']
