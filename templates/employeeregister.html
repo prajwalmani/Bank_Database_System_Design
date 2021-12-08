@@ -78,22 +78,35 @@ legend.scheduler-border {
     }
 </style>
 <body id="main">
-<a href="home.html" ><h1 id="heading">BANK WITH US!</h1></a>
+
+  
+<a href="home.html" ><h1 id="heading">Golden Horizon Bank</h1></a>
+
+<h2 style="text-align: center;">Employee Register</h2>
+  
 <div class="row">
     <div class="offset-1 col-2">
-            <div class="control-group">
+            
             <form method="post">
-                    <label class="control-label input-label" for="Name"><i class="fa fa-key"></i>    Name :</label><br>
-                    <input type="text" name="Name" required/> <br><br>
-                    <label class="control-label input-label" for="Branch"><i class="fa fa-key"></i>    Branch ID :</label><br>
+              <label class="control-label input-label" for="date"> Date : 12/9/2012</label><br>
+              <label class="control-label input-label" for="Branch">    Branch ID :</label><br>
                     <input type="text" name="Branch" required/> <br><br>
-                    <label class="control-label input-label" for="SSN"><i class="fa fa-envelope"></i>    Social Security number :</label><br>
+                    <label class="control-label input-label" for="SSN">   Social Security number :</label><br>
                     <input type="number" name="SSN" placeholder="111223333" required/><br><br>
-                    <label class="control-label input-label" for="email"><i class="fa fa-envelope"></i>    E-mail :</label><br>
+                    <label class="control-label input-label" for="Name">   Name :</label><br>
+                    <input type="text" name="Name" required/> <br><br>
+                    <label class="control-label input-label" for="phone">   Phone# :</label><br>
+                    <input type="number" name="phone" placeholder="1234567890" required/><br><br>
+                    <label class="control-label input-label" for="dname">   Dependent name :</label><br>
+                    <input type="text" name="dname" required/><br><br>
+            </div>
+            <div class="offset-2 col-2">
+              <br>
+                    <label class="control-label input-label" for="email">   E-mail :</label><br>
                     <input type="email" name="email" placeholder="abc@gmail.com" /><br><br>
-                    <label class="control-label input-label" for="Password"><i class="fa fa-key"></i>    Password :</label><br>
+                    <label class="control-label input-label" for="Password">    Password :</label><br>
                     <input type="password" name="Password" required/> <br><br>
-                    <label class="control-label input-label" for="RePassword"><i class="fa fa-key"></i>   Confirm Password :</label><br>
+                    <label class="control-label input-label" for="RePassword">   Confirm Password :</label><br>
                     <input type="password" name="CPassword" required /> <br><br>
                     {% block content %}
                     <div class="container">

@@ -8,25 +8,36 @@
     </head>
     <style>
     body{
-      background-image: url('https://img.wallpapersafari.com/desktop/1600/900/23/35/E56yMC.jpg');
+      background-image: url('https://visme.co/blog/wp-content/uploads/2017/07/50-Beautiful-and-Minimalist-Presentation-Backgrounds-021.jpg');
       background-size: cover;
       background-repeat: no-repeat;
+      
        background-color: rgb(220, 227, 230);
        
     }
     #heading{
         background-color: transparent;
         padding:30px 20px 30px 20px;
-        color: darkblue;
-        font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        color:black;
+        font-family: 'Times New Roman', serif;
         font-style: oblique;
         letter-spacing: 1.5px;
         word-spacing: 4px;
-    
+        backdrop-filter: blur(20px);
         text-align: center;
     }
     
+    .nav-link1 {
+      color:black;
+      padding-right: .5rem !important;
+      padding-left: .5rem !important;
+    }
     
+    /* Fixes dropdown menus placed on the right side */
+    .ml-auto .dropdown-menu {
+      left: auto !important;
+      right: 0px;
+    }
     
     #head{
       color: white;
@@ -40,7 +51,34 @@
 </head>
 <body id="main">
     
-<a href="home.html" ><h1 id="heading">BANK WITH US!</h1></a>
+<a href="home.html" ><h1 id="heading">Golden Horizon Bank</h1></a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: transparent;  backdrop-filter:blur(20px) ;;">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto" >
+        <li class="nav-item active">
+          <a class="nav-link" style="color: black; "href="#">Accounts <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="color: black;" href="{{ url_for('contactus')}}">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" style="color: black;" href="#">Pay & Transfer</a>
+        </li><li class="nav-item">
+          <a class="nav-link disabled" style="color: black;" href="#">Invesments</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled"style="color: black;" href="#">Security & Privacy</a>
+        </li>
+      </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+        <a  class="nav-link1" style="float: right;" href="{{ url_for('customerauth')}}">Logout</a>
+      </li>
+      </ul>
+    </div>
+  </nav>
+  <br>
+
 <h2 style="text-align: center;">Perform your Transactions here!</h2>
 <br>
 <br>

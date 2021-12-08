@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Login</title>
+    <title>Accounts</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <style>
 body{
-  background-image: url('https://img.wallpapersafari.com/desktop/1680/1050/42/12/w3xlib.jpg');
+  background-image: url('https://visme.co/blog/wp-content/uploads/2017/07/50-Beautiful-and-Minimalist-Presentation-Backgrounds-021.jpg  ');
   background-size: cover;
   background-repeat: no-repeat;
+  backdrop-filter:blur(5px) ;
    background-color: rgb(220, 227, 230);
 }
 #heading{
-    background-color: transparent;
+    background-color:transparent;
+    backdrop-filter:blur(25px) ;
     padding:30px 20px 30px 20px;
-    color: darkblue;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color:black;
+    font-family: 'Times New Roman', serif;
     font-style: oblique;
     letter-spacing: 1.5px;
     word-spacing: 4px;
@@ -26,9 +28,7 @@ body{
 }
 
 
-#head{
-  color: white;
-}
+
 
 a
 {color:black}
@@ -145,8 +145,9 @@ legend.scheduler-border {
     width: 70%;
   }
 }
+
 .nav-link1 {
-      color:white;
+      color:black;
       padding-right: .5rem !important;
       padding-left: .5rem !important;
     }
@@ -160,27 +161,24 @@ legend.scheduler-border {
 
 
 <body id="main">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
   
+<a href="home.html" ><h1 id="heading">Golden Horizon Bank</h1></a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: transparent;  backdrop-filter:blur(20px) ;;">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto" >
         <li class="nav-item active">
-          <a class="nav-link" href="#">Accounts <span class="sr-only">(current)</span></a>
+          <a class="nav-link" style="color: black; "href="#">Accounts <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('contactus')}}">Contact</a>
+          <a class="nav-link" style="color: black;" href="{{ url_for('contactus')}}">Contact</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Pay & Transfer</a>
+          <a class="nav-link disabled" style="color: black;" href="#">Pay & Transfer</a>
         </li><li class="nav-item">
-          <a class="nav-link disabled" href="#">Invesments</a>
+          <a class="nav-link disabled" style="color: black;" href="#">Invesments</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Security & Privacy</a>
+          <a class="nav-link disabled"style="color: black;" href="#">Security & Privacy</a>
         </li>
       </ul>
         <ul class="navbar-nav ml-auto">
@@ -190,6 +188,12 @@ legend.scheduler-border {
       </ul>
     </div>
   </nav>
+
+  <div class="row">
+    <div class="offset-2 column-2">
+
+   <br>
+   <br>
 
     <div id="blocks">
       <h1>Your Accounts</h1>
@@ -279,5 +283,7 @@ legend.scheduler-border {
       }
 
     </script>
+     </div>
+    </div>
     </body>
     </html>
