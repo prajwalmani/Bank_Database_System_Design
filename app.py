@@ -2,8 +2,13 @@ from flask import Flask,render_template,request,flash,url_for,redirect
 from flask.templating import render_template_string
 from flask.wrappers import Request
 import pymysql
-from pymysql import ROWID, cursors
+from pymysql import DATE, ROWID, cursors
 import json
+import os 
+import time
+import uuid
+import datetime
+
 
 app = Flask(__name__)
 
@@ -191,6 +196,40 @@ def customeraccountsdisp():
 def contactus():
     return render_template("contactus.html")
 
+
+@app.route('/transfer.html', methods=['GET', 'POST'])
+def transfer():
+    flag=0
+    ssn=global_ssn[-1]
+    if request.method == 'POST' and "raccount" in request.form:
+        radio_value=request.form['raccount']
+        eamount=request.form['eamount']
+        try:
+            if radio_value=='s':
+                sql="select `account`,`balance` from `account` where `account_type`= 's' and `cssn`={0}".format(ssn)
+            if radio_value=='c':
+                sql="select `account`,`balance` from `account` where `account_type`='c' and `cssn`={1}".format(ssn)
+            cursor.execute(sql)
+            rows=cursor.fetchall()
+            for row in rows:
+                balance=int(row[1])+int(eamount)
+                account=row[0]
+                update_sql="""UPDATE `account` 
+                SET `balance`={0}
+                where account={1}""".format(balance,account)
+                cursor.execute(update_sql)
+                connection.commit()
+                insert_quer=("""
+                INSERT INTO `transct` (`transactionid`, `account#`, `type`, `amount`, `time`) VALUES (%s,%s,%s,%s,%s)
+                """)
+                values=(uuid.uuid1(),account,"csd",balance,datetime.datetime.utcnow())
+                cursor.execute(insert_quer,values)
+                connection.commit()
+                flag=1
+                flash("TransactionID:{0}\nAccount:{1}\nType:Cash Deposit\nAmount:${2}\nTotal Balance:${3}\n".format(uuid.uuid1(),account,eamount,balance))
+        except:
+                 flash("Couldn't find any savings/checking account link to this Email id Please contact the branch.")
+    return render_template("transfer.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
