@@ -1,3 +1,4 @@
+from types import MethodDescriptorType
 from flask import Flask,render_template,request,flash,url_for,redirect
 from flask.templating import render_template_string
 from flask.wrappers import Request
@@ -8,6 +9,7 @@ import os
 import time
 import uuid
 import datetime
+from datetime import date
 
 
 app = Flask(__name__)
@@ -121,6 +123,9 @@ def customerregister():
 @app.route('/customeraccountsdisp.html',methods=['POST','GET'])
 def customeraccountsdisp():
     ssn=global_ssn[-1]
+    f = open("phpdata.txt", "w")
+    f.write(ssn)
+    f.close()
     sql='select account,balance,last_accessed_date,account_type from `account`where cssn={0};'.format(ssn)
     cursor.execute(sql)
     rows=cursor.fetchall()
@@ -218,9 +223,9 @@ def transfer():
                 cursor.execute(update_sql)
                 connection.commit()
                 insert_quer=("""
-                INSERT INTO `transct` (`transactionid`, `account#`, `type`, `amount`, `time`) VALUES (%s,%s,%s,%s,%s)
+                INSERT INTO `transct` (`transactionid`, `account`, `type`, `tname`, `amount`,`balance` ,`time`) VALUES (%s,%s,%s,%s,%s,%s,%s)
                 """)
-                values=(uuid.uuid1(),account,"cd",balance,datetime.datetime.utcnow())
+                values=(uuid.uuid1(),account,"CDD","Cheque Deposit Debit",toamount,balance,datetime.datetime.utcnow())
                 cursor.execute(insert_quer,values)
                 connection.commit()
             sql="select `balance` from `account` where `account`={0}".format(toaccountno)
@@ -234,25 +239,66 @@ def transfer():
                 cursor.execute(update_sql)
                 connection.commit()
                 insert_quer=("""
-                INSERT INTO `transct` (`transactionid`, `account#`, `type`, `amount`, `time`) VALUES (%s,%s,%s,%s,%s)
+                INSERT INTO `transct` (`transactionid`, `account`, `type`, `tname`, `amount`,`balance` ,`time`) VALUES (%s,%s,%s,%s,%s,%s,%s)
                 """)
-                values=(uuid.uuid1(),toaccountno,"cd",balance,datetime.datetime.utcnow())
+                values=(uuid.uuid1(),toaccountno,"CDC","Cheque Depost Credit ",toamount,balance,datetime.datetime.utcnow())
                 cursor.execute(insert_quer,values)
                 connection.commit()
                 flash("Cheque deposited to Account No:{0} worth of ${1}".format(toaccountno,toamount))
 
         except:
             flash("Failure Cheque not deposited!")
+    
+    # withdraw money 
+    if request.method=="POST" and "waccount" in request.form:
+        radio_value=request.form['waccount']
+        amount=request.form['amount']
+        try:
+            if radio_value=='s':
+                sql="select `account`,`balance` from `account` where `account_type`= 's' and `cssn`={0}".format(ssn)
+            if radio_value=='c':
+                sql="select `account`,`balance` from `account` where `account_type`='c' and `cssn`={1}".format(ssn)
+            cursor.execute(sql)
+            rows=cursor.fetchall()
+            for row in rows:
+                balance=int(row[1])-int(amount)
+                if balance<0 and radio_value=='s':
+                    flash("Insufficent Funds")
+                if balance<0 and radio_value=='c':
+                    flash("Overdrafted But transaction was successfull")
+                    overdraftedsql=("""
+                    INSERT INTO `checking`(`checkingaccount`, `overdrafted_amount`, `overdrafted_account`, `date`) VALUES (%s,%s,%s,%s)
+                    """)
+                    today=date.today()
+                    values=(row[0],balance,"1234",today)
+                    cursor.execute(overdraftedsql,values)
+                    connection.commit()
+                account=row[0]
+                update_sql="""UPDATE `account` 
+                SET `balance`={0}
+                where account={1}""".format(balance,account)
+                cursor.execute(update_sql)
+                connection.commit()
+                insert_quer=("""
+                INSERT INTO `transct` (`transactionid`, `account`, `type`, `tname`, `amount`,`balance` ,`time`) VALUES (%s,%s,%s,%s,%s,%s,%s)
+                """)
+                values=(uuid.uuid1(),account,"MW","Money Withdraw",amount,balance,datetime.datetime.utcnow())
+                cursor.execute(insert_quer,values)
+                connection.commit()
+                flash("Transcation was successfull")
+        except:
+            pass
         
     # cash deposit 
     if request.method == 'POST' and "raccount" in request.form:
+        ssn=global_ssn[-1]
         radio_value=request.form['raccount']
         eamount=request.form['eamount']
         try:
             if radio_value=='s':
                 sql="select `account`,`balance` from `account` where `account_type`= 's' and `cssn`={0}".format(ssn)
             if radio_value=='c':
-                sql="select `account`,`balance` from `account` where `account_type`='c' and `cssn`={1}".format(ssn)
+                sql="select `account`,`balance` from `account` where `account_type`='c' and `cssn`={0}".format(ssn)
             cursor.execute(sql)
             rows=cursor.fetchall()
             for row in rows:
@@ -264,16 +310,20 @@ def transfer():
                 cursor.execute(update_sql)
                 connection.commit()
                 insert_quer=("""
-                INSERT INTO `transct` (`transactionid`, `account#`, `type`, `amount`, `time`) VALUES (%s,%s,%s,%s,%s)
+                INSERT INTO `transct` (`transactionid`, `account`, `type`, `tname`, `amount`,`balance` ,`time`) VALUES (%s,%s,%s,%s,%s,%s,%s)
                 """)
-                values=(uuid.uuid1(),account,"csd",balance,datetime.datetime.utcnow())
+                values=(uuid.uuid1(),account,"CSD","Cash Deposit",eamount,balance,datetime.datetime.utcnow())
                 cursor.execute(insert_quer,values)
                 connection.commit()
-                flag=1
                 flash("TransactionID:{0}\nAccount:{1}\nType:Cash Deposit\nAmount:${2}\nTotal Balance:${3}\n".format(uuid.uuid1(),account,eamount,balance))
         except:
                  flash("Couldn't find any savings/checking account link to this Email id Please contact the branch.")
     return render_template("transfer.html")
+
+# @app.route("acctransactiondisplay.html",methods=['GET', 'POST'])
+def acctransdisp():
+    return render_template("acctransactiondisplay.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
