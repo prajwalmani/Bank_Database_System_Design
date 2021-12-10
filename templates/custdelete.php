@@ -138,13 +138,13 @@ background-color: transparent;
           <a class="nav-link" style="color: black;" href="{{ url_for('contactus')}}">Create Employee Account</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" style="color: black;" href="emphomedisplay.html">view my account</a>
+          <a class="nav-link" style="color: black;" href="emphomedisplay.html">view my account</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" style="color: black;" href="http://localhost/bank/custdeleteinfo.php">delete customer account</a>
+          <a class="nav-link" style="color: black;" href="http://localhost/bank/custdeleteinfo.php">delete customer account</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" style="color: black;" href="http://localhost/bank/modifyinfo.php">modify customer account</a>
+          <a class="nav-link" style="color: black;" href="http://localhost/bank/modifyinfo.php">modify customer account</a>
         </li>
       </ul>
         <ul class="navbar-nav ml-auto">
@@ -154,12 +154,9 @@ background-color: transparent;
       </ul>
     </div>
   </nav>
-
+<br><br>
 
 <?php
-if (isset($_POST['input'])) {
-    $search = $_POST['input'];
-}
 
 if (isset($_POST['searchcategory'])) {
     $search_category = $_POST['searchcategory'];
@@ -169,7 +166,7 @@ if (isset($_POST['searchcategory'])) {
 }
 
 
-$query="DELETE FROM customer where ".$search_category." ='".$search."'";   
+$query="DELETE FROM customer where cssn ='".$search."'";   
 
 $servername = "localhost";
 $username = "root";
@@ -187,9 +184,9 @@ if (!$conn) {
 //echo $asc_query;    
 
 if (mysqli_query($conn, $query)) {
-    echo "Record deleted successfully";
+    echo "<br><br><h2 style='text-align:center;'> Record deleted successfully<h2>";
   } else {
-    echo "Error deleted record: " . mysqli_error($conn);
+    echo "<br><br><h2 style='text-align:center;'> Error deleted record: " . mysqli_error($conn)."<h2>";
   }
    
 
