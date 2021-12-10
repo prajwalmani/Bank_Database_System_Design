@@ -104,56 +104,10 @@ legend.scheduler-border {
   opacity: 1;
 }
 
-.popup {
-  margin: 70px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 5px;
-  width: 30%;
-  position: relative;
-  transition: all 5s ease-in-out;
+#sel{
+ width:300px;   
 }
 
-.popup h2 {
-  margin-top: 0;
-  color: #333;
-  font-family: Tahoma, Arial, sans-serif;
-}
-.popup .close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  transition: all 200ms;
-  font-size: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
-}
-.popup .close:hover {
-  color: #06D85F;
-}
-.popup .content {
-  max-height: 30%;
-  overflow: auto;
-}
-
-@media screen and (max-width: 700px){
-  .box{
-    width: 70%;
-  }
-  .popup{
-    width: 70%;
-  }
-}
-th, td {
-  padding: 15px;
-  text-align:center
-}
-table{
-  margin-left: auto;
-  margin-right: auto;
-
-}
 .navbar{
 background-color: transparent;
 }
@@ -178,19 +132,19 @@ background-color: transparent;
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto" >
         <li class="nav-item active">
-          <a class="nav-link" style="color: black; "href="#">Create Customer Account <span class="sr-only">(current)</span></a>
+          <a class="nav-link" style="color: black; "href="accountcreation.html">Create Customer Account <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" style="color: black;" href="{{ url_for('contactus')}}">Create Employee Account</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" style="color: black;" href="#">view my account</a>
+          <a class="nav-link disabled" style="color: black;" href="emphomedisplay.html">view my account</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" style="color: black;" href="#">delete customer account</a>
+          <a class="nav-link disabled" style="color: black;" href="http://localhost/bank/custdeleteinfo.php">delete customer account</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" style="color: black;" href="#">modify customer account</a>
+          <a class="nav-link disabled" style="color: black;" href="http://localhost/bank/modifyinfo.php">modify customer account</a>
         </li>
       </ul>
         <ul class="navbar-nav ml-auto">
@@ -201,41 +155,46 @@ background-color: transparent;
     </div>
   </nav>
 
- <br>
- <br>
-      <h2 style="text-align: center;">Personal banking details</h2>
-    <br>
-    <table border=1>
-        <tr>
-        <th>Customer Name</th>
-        <th>Saving Account</th>
-        <th>Checking Account</th>
-        <th>Money Market Account</th>
-        <th>Loan Account</th>
-    </tr>
-    <tr>
-        <td>ABC</td>
-        <td>123</td>
-        <td>-</td>
-        <td>345</td>
-        <td>-</td>
-    </tr>
-    <tr>
-        <td>ABC</td>
-        <td>123</td>
-        <td>-</td>
-        <td>345</td>
-        <td>-</td>
-    </tr>
-    <tr>
-        <td>ABC</td>
-        <td>123</td>
-        <td>-</td>
-        <td>345</td>
-        <td>-</td>
-    </tr>
-    </table>
-    
 
-    </body>
-    </html>
+<?php
+if (isset($_POST['input'])) {
+    $search = $_POST['input'];
+}
+
+if (isset($_POST['searchcategory'])) {
+    $search_category = $_POST['searchcategory'];
+    if ($search_category == "cssn"){
+        
+    }
+}
+
+
+$query="DELETE FROM customer where ".$search_category." ='".$search."'";   
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$db = "bank";
+// Create connection
+$conn = mysqli_connect($servername, $username, $password,$db);
+// Check connection
+if (!$conn) {
+   die("Connection failed: " . mysqli_connect_error());
+}
+//echo "Connected successfully";
+
+ 
+//echo $asc_query;    
+
+if (mysqli_query($conn, $query)) {
+    echo "Record deleted successfully";
+  } else {
+    echo "Error deleted record: " . mysqli_error($conn);
+  }
+   
+
+
+?>
+
+<body id="main">
+<title>Deletion successfully</title>

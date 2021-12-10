@@ -1,4 +1,17 @@
 <!DOCTYPE html>
+
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$db = "bank";
+// Create connection
+$conn = mysqli_connect($servername, $username, $password,$db);
+// Check connection
+if (!$conn) {
+   die("Connection failed: " . mysqli_connect_error());
+}
+//echo "Connected successfully<br>";?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -104,56 +117,10 @@ legend.scheduler-border {
   opacity: 1;
 }
 
-.popup {
-  margin: 70px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 5px;
-  width: 30%;
-  position: relative;
-  transition: all 5s ease-in-out;
+#sel{
+ width:300px;   
 }
 
-.popup h2 {
-  margin-top: 0;
-  color: #333;
-  font-family: Tahoma, Arial, sans-serif;
-}
-.popup .close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  transition: all 200ms;
-  font-size: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
-}
-.popup .close:hover {
-  color: #06D85F;
-}
-.popup .content {
-  max-height: 30%;
-  overflow: auto;
-}
-
-@media screen and (max-width: 700px){
-  .box{
-    width: 70%;
-  }
-  .popup{
-    width: 70%;
-  }
-}
-th, td {
-  padding: 15px;
-  text-align:center
-}
-table{
-  margin-left: auto;
-  margin-right: auto;
-
-}
 .navbar{
 background-color: transparent;
 }
@@ -178,16 +145,16 @@ background-color: transparent;
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto" >
         <li class="nav-item active">
-          <a class="nav-link" style="color: black; "href="#">Create Customer Account <span class="sr-only">(current)</span></a>
+          <a class="nav-link" style="color: black; "href="accountcreation.html">Create Customer Account <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" style="color: black;" href="{{ url_for('contactus')}}">Create Employee Account</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" style="color: black;" href="#">view my account</a>
+          <a class="nav-link disabled" style="color: black;" href="emphomedisplay.html">view my account</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" style="color: black;" href="#">delete customer account</a>
+          <a class="nav-link disabled" style="color: black;" href="http://localhost/bank/custdeleteinfo.php">delete customer account</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" style="color: black;" href="#">modify customer account</a>
@@ -200,42 +167,67 @@ background-color: transparent;
       </ul>
     </div>
   </nav>
+    <body>
+        <BR>
+        <br>
+<div class="contaier-fluid" id="searchpage">
+<div class="row">
+<div class="offset-2 col-5">
+<form action='modify.php' method='POST'>
+<h4>Select the CSSN to change   :  </h4>
+<select name="from"  id="from" style="width:8cm;height:1cm;"> 
+<option value="none" selected disabled hidden> 
+          Select a CSSN to change
+      </option
+<?php
+		$sql = "SELECT cssn FROM customer";
+        $result = $conn->query($sql);
+        $i=0;
+        while($rs = $result->fetch_assoc()){
+            $data[$i] = $rs['cssn'];
+            echo "<option> ".$data[$i]."</option>";
+            $i++;
+        }
+	?>
+</select>
+<br>
+<br>
 
- <br>
- <br>
-      <h2 style="text-align: center;">Personal banking details</h2>
-    <br>
-    <table border=1>
-        <tr>
-        <th>Customer Name</th>
-        <th>Saving Account</th>
-        <th>Checking Account</th>
-        <th>Money Market Account</th>
-        <th>Loan Account</th>
-    </tr>
-    <tr>
-        <td>ABC</td>
-        <td>123</td>
-        <td>-</td>
-        <td>345</td>
-        <td>-</td>
-    </tr>
-    <tr>
-        <td>ABC</td>
-        <td>123</td>
-        <td>-</td>
-        <td>345</td>
-        <td>-</td>
-    </tr>
-    <tr>
-        <td>ABC</td>
-        <td>123</td>
-        <td>-</td>
-        <td>345</td>
-        <td>-</td>
-    </tr>
-    </table>
-    
+<label>Select the attribute to change</label><br>
+    <select name="searchcategory"  id="sel" style="width:8cm;height:1cm;"> 
+    <option value="none" selected disabled hidden> 
+          Select a Category to change
+      </option>
+	<option value = "name"> Name
+	</option>  
+	<option value = "apartment"> Apartment#
+	</option>  
+    <option value = "stree"> street#
+	</option>
+    <option value = "city"> city
+	</option>
+    <option value = "state"> state
+	</option>
+    <option value = "Zipcode"> Zipcode
+	</option>
+</select>
+<br>
+<br>
 
-    </body>
-    </html>
+
+<label>Enter the value to update</label><br>
+<input type="text" name="to" id="to" placeholder="change to"/>
+<br><br>
+
+    <button  type="submit" id="okButton"  class="btn btn-primary">Modify</button>
+</form> 
+</div>
+</div>
+</div>
+
+
+
+</body>
+</html>
+
+
