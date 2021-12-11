@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2021 at 02:46 PM
+-- Generation Time: Dec 11, 2021 at 03:33 PM
 -- Server version: 10.4.22-MariaDB
--- PHP Version: 7.3.33
+-- PHP Version: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,7 +43,16 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`account`, `balance`, `last_accessed_date`, `account_type`, `intereset_overdraft`, `overdrafted_account`, `cssn`, `Branch_id`) VALUES
-(1, 5000, '2021-12-05', 's', NULL, NULL, '1234', 1);
+(1, 5000, '2021-12-05', 's', NULL, NULL, '1234', 1),
+(2, 5025, '2021-12-05', 's', NULL, NULL, '1236', 1),
+(3, 2500, '2021-12-07', 'c', NULL, NULL, '1236', 2),
+(4, 6000, '2021-12-07', 'c', NULL, NULL, '1234', 1),
+(5, 600, '2021-12-09', 'm', NULL, NULL, '5450', 1),
+(6, 700, '2021-12-11', 's', NULL, NULL, '1560', 1),
+(7, 800, '2021-12-11', 's', NULL, NULL, '7535', 1),
+(8, 900, '2021-12-11', 'c', NULL, NULL, '1236', 1),
+(9, 15000, '2021-12-11', 'm', NULL, NULL, '7535', 1),
+(10, 800, '2021-12-11', 'l', NULL, NULL, '1236', 1);
 
 -- --------------------------------------------------------
 
@@ -142,7 +151,10 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`CSSN`, `Name`, `Apartment`, `Street#`, `City`, `State`, `Zipcode`, `PersonalBanker_ESSN`) VALUES
 ('1234', 'Hinata', 324, 322, 'Kearny', 'NJ', 1786, '123'),
-('1236', 'Kiba', 3, 1, 'Newark', 'New York', 7029, '125');
+('1236', 'Kiba', 3, 1, 'Newark', 'New York', 7029, '125'),
+('1560', 'Rin', 23, 4, 'New Jersey', 'Newark', 7303, '125'),
+('5450', 'Betty', 56, 3, 'San Francisco', 'Calfornia', 94016, '124'),
+('7535', 'Archie', 322, 20, 'Chicago', 'Illinois', 60007, '123');
 
 -- --------------------------------------------------------
 
