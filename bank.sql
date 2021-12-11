@@ -362,13 +362,7 @@ ALTER TABLE `account`
 
 --
 -- Constraints for table `branch_manager`
---
-ALTER TABLE `branch_manager`
-  ADD CONSTRAINT `branch_manager_ibfk_1` FOREIGN KEY (`branch_id`) REFERENCES `branch` (`branchid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `branch_manager_ibfk_2` FOREIGN KEY (`manager`) REFERENCES `employee` (`ESSN`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `branch_manager_ibfk_3` FOREIGN KEY (`asstmanager`) REFERENCES `employee` (`ESSN`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
 -- Constraints for table `checking`
 --
 ALTER TABLE `checking`
