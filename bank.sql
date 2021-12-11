@@ -119,13 +119,6 @@ CREATE TABLE `checking` (
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `checking`
---
-
-INSERT INTO `checking` (`checkingaccount`, `overdrafted_amount`, `overdrafted_account`, `date`) VALUES
-('7', '0', '4', '2021-12-11');
-
 -- --------------------------------------------------------
 
 --
