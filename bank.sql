@@ -353,6 +353,74 @@ ALTER TABLE `transct`
   ADD PRIMARY KEY (`transactionid`);
 COMMIT;
 
+--
+-- Constraints for table `account`
+--
+ALTER TABLE `account`
+  ADD CONSTRAINT `account_ibfk_1` FOREIGN KEY (`cssn`) REFERENCES `customer` (`CSSN`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `account_ibfk_2` FOREIGN KEY (`Branch_id`) REFERENCES `branch` (`branchid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `branch_manager`
+--
+ALTER TABLE `branch_manager`
+  ADD CONSTRAINT `branch_manager_ibfk_1` FOREIGN KEY (`branch_id`) REFERENCES `branch` (`branchid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `branch_manager_ibfk_2` FOREIGN KEY (`manager`) REFERENCES `employee` (`ESSN`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `branch_manager_ibfk_3` FOREIGN KEY (`asstmanager`) REFERENCES `employee` (`ESSN`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `checking`
+--
+ALTER TABLE `checking`
+  ADD CONSTRAINT `checking_ibfk_1` FOREIGN KEY (`checkingaccount`) REFERENCES `account` (`account`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `checking_ibfk_2` FOREIGN KEY (`overdrafted_account`) REFERENCES `account` (`account`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `customer`
+--
+ALTER TABLE `customer`
+  ADD CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`PersonalBanker_ESSN`) REFERENCES `employee` (`ESSN`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `employee`
+--
+ALTER TABLE `employee`
+  ADD CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`Manager_SSN`) REFERENCES `employee` (`ESSN`),
+  ADD CONSTRAINT `employee_ibfk_2` FOREIGN KEY (`Branch_ID`) REFERENCES `branch` (`branchid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `loan`
+--
+ALTER TABLE `loan`
+  ADD CONSTRAINT `loan_ibfk_1` FOREIGN KEY (`loan`) REFERENCES `account` (`account`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `loan_ibfk_2` FOREIGN KEY (`account#`) REFERENCES `account` (`account`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `moneymarket`
+--
+ALTER TABLE `moneymarket`
+  ADD CONSTRAINT `moneymarket_ibfk_1` FOREIGN KEY (`marketaccount`) REFERENCES `account` (`account`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `savings`
+--
+ALTER TABLE `savings`
+  ADD CONSTRAINT `savings_ibfk_1` FOREIGN KEY (`savingsaccount`) REFERENCES `account` (`account`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `transcation`
+--
+ALTER TABLE `transcation`
+  ADD CONSTRAINT `transcation_ibfk_1` FOREIGN KEY (`taccount`) REFERENCES `account` (`account`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `transct`
+--
+ALTER TABLE `transct`
+  ADD CONSTRAINT `transct_ibfk_1` FOREIGN KEY (`transactionid`) REFERENCES `transcation` (`transactionid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transct_ibfk_2` FOREIGN KEY (`account#`) REFERENCES `account` (`account`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
