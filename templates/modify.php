@@ -141,10 +141,10 @@ background-color: transparent;
           <a class="nav-link disabled" style="color: black;" href="emphomedisplay.html">view my account</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" style="color: black;" href="http://localhost/bank/custdeleteinfo.php">delete customer account</a>
+          <a class="nav-link disabled" style="color: black;" href="custdeleteinfo.php">delete customer account</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" style="color: black;" href="http://localhost/bank/modifyinfo.php">modify customer account</a>
+          <a class="nav-link disabled" style="color: black;" href="#">modify customer account</a>
         </li>
       </ul>
         <ul class="navbar-nav ml-auto">
@@ -169,6 +169,14 @@ if (!$conn) {
    die("Connection failed: " . mysqli_connect_error());
 }
 //echo "Connected successfully<br>";?>
+<script>
+	function foo(){
+        var from = document.getElementsByTagName("from")[0];
+		var att = document.createAttribute("list");
+			att.value = "cssn";
+		from.setAttributeNode(att);
+	}
+    </script>
 
 
 <?php
