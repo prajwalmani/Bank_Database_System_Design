@@ -27,6 +27,13 @@ body{
     text-align: center;
 }
 
+.centered{
+  border-style: solid;
+  border-width: 3px;
+  margin-left: auto; margin-right: auto; padding: 3pc;
+  border-color: black;
+  text-align: center;
+}
 
 
 
@@ -37,125 +44,26 @@ color: black;
 }
 
 
-#Entertainment{
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+.slide_diagonal:hover {
+  box-shadow: inset 400px 50px 0 0 skyblue;
 }
-#right{
-  margin-left:0.5cm;
-}
-#right2{
-  margin-left:23cm;
-}
-fieldset.scheduler-border {
-    border: 1px double black;
-    padding: 0 1.4em 1.4em 1.4em;
-    margin: 0 0 1.5em 0;
-}
-
-legend.scheduler-border {
-    width:auto; /* Or auto */
-    padding:0 10px; /* To give a bit of padding on the left and right */
-    border-bottom:none;
-}
-#accountbox{
-  font-family: 'Times New Roman', Times, serif;
-  font-size: larger;
-}
-
-
-.open-button {
-  background-color: #555;
-  color: white;
-  padding: 16px 20px;
-  border: none;
+.button_slide {
+  color: navy;
+  border: 2px solid rgb(0, 13, 128);
+  border-radius: 0px;
+  padding: 18px 36px;
+  display: inline-block;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 14px;
+  letter-spacing: 1px;
   cursor: pointer;
-  opacity: 0.8;
-  position: fixed;
-  bottom: 23px;
-  right: 28px;
-  width: 280px;
-}
+  box-shadow: inset 0 0 0 0 royalblue;
+  -webkit-transition: ease-out 0.4s;
+  -moz-transition: ease-out 0.4s;
+  transition: ease-out 0.4s;
+  
+  width: 50%;
 
-/* The popup form - hidden by default */
-.form-popup {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  right: 15px;
-  border: 3px solid #f1f1f1;
-  z-index: 9;
-}
-
-
-
-.overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.7);
-  transition: opacity 500ms;
-  visibility: hidden;
-  opacity: 0;
-}
-.overlay:target {
-  visibility: visible;
-  opacity: 1;
-}
-
-.popup {
-  margin: 70px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 5px;
-  width: 30%;
-  position: relative;
-  transition: all 5s ease-in-out;
-}
-
-.popup h2 {
-  margin-top: 0;
-  color: #333;
-  font-family: Tahoma, Arial, sans-serif;
-}
-.popup .close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  transition: all 200ms;
-  font-size: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
-}
-.popup .close:hover {
-  color: #06D85F;
-}
-.popup .content {
-  max-height: 30%;
-  overflow: auto;
-}
-
-@media screen and (max-width: 700px){
-  .box{
-    width: 70%;
-  }
-  .popup{
-    width: 70%;
-  }
-}
-th, td {
-  padding: 15px;
-  text-align:center
-}
-table{
-  margin-left: auto;
-  margin-right: auto;
-
-}
-.navbar{
-background-color: transparent;
 }
 .nav-link1 {
       color:black;
@@ -173,69 +81,18 @@ background-color: transparent;
 
 <body id="main">
   
-<a href="home.html" ><h1 id="heading">Golden Horizon Bank</h1></a>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: transparent;  backdrop-filter:blur(20px) ;;">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto" >
-        <li class="nav-item active">
-          <a class="nav-link" style="color: black; "href="#">Create Customer Account <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" style="color: black;" href="{{ url_for('contactus')}}">Create Employee Account</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" style="color: black;" href="#">view my account</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" style="color: black;" href="#">delete customer account</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" style="color: black;" href="#">modify customer account</a>
-        </li>
-      </ul>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-        <a  class="nav-link1" style="float: right;" href="{{ url_for('customerauth')}}">Logout</a>
-      </li>
-      </ul>
+<a href="home.html" ><h1 id="heading">CS631-BANK</h1></a><br>
+<br>
+<div class="row">
+  <div class="offset-3 col-5" style="border: 4px;">
+    <div class="centered">
+      <br>
+    <a href=""><button class="button_slide slide_diagonal">Add a customer</button></a><br><br><br>
+    <a href="http://localhost/modifyinfo.php"><button class="button_slide slide_diagonal">Modify a customer</button></a><br><br><br>
+    <a href=""><button class="button_slide slide_diagonal">Delete a customer</button></a><br><br>
+  </div>
     </div>
-  </nav>
-
- <br>
- <br>
-      <h2 style="text-align: center;">Personal banking details</h2>
-    <br>
-    <table border=1>
-        <tr>
-        <th>Customer Name</th>
-        <th>Saving Account</th>
-        <th>Checking Account</th>
-        <th>Money Market Account</th>
-        <th>Loan Account</th>
-    </tr>
-    <tr>
-        <td>ABC</td>
-        <td>123</td>
-        <td>-</td>
-        <td>345</td>
-        <td>-</td>
-    </tr>
-    <tr>
-        <td>ABC</td>
-        <td>123</td>
-        <td>-</td>
-        <td>345</td>
-        <td>-</td>
-    </tr>
-    <tr>
-        <td>ABC</td>
-        <td>123</td>
-        <td>-</td>
-        <td>345</td>
-        <td>-</td>
-    </tr>
-    </table>
-    
+    </div>
 
     </body>
     </html>

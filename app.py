@@ -10,6 +10,9 @@ import time
 import uuid
 import datetime
 from datetime import date
+import calendar
+import datetime
+import time
 
 
 app = Flask(__name__)
@@ -24,6 +27,7 @@ global_ssn=[]
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    servicecharge()
     if request.method=='POST':
         customerbutton=request.form.get('customerbutton')
         employeebutton=request.form.get('employeebutton')
@@ -64,7 +68,7 @@ def employeeauth():
         rows=cursor.fetchall()
         for row in rows:
             if email==row[0] and password==row[1]:
-                return render_template("employeedisp.html")
+                return render_template("emphomedisplay.html")
         else:
             flash("Wrong credentials! Try again... ")
             return  render_template("employeelogin.html")
@@ -324,6 +328,27 @@ def transfer():
 def acctransdisp():
     return render_template("acctransactiondisplay.html")
 
+def servicecharge():
+        today = datetime.date.today()
+        if today.day == calendar.monthrange(today.year, today.month):
+            sql="SELECT account,balance FROM `account`;"
+            cursor.execute(sql)
+            rows=cursor.fetchall()
+            for row in rows:
+                balance=int(row[1])-10
+                account=row[0]
+                update_sql="""UPDATE `account` 
+                    SET `balance`={0}
+                    where account={1}""".format(balance,account)
+                cursor.execute(update_sql)
+                connection.commit()
+                insert_quer=("""
+                    INSERT INTO `transct` (`transactionid`, `account`, `type`, `tname`, `amount`,`balance` ,`time`) VALUES (%s,%s,%s,%s,%s,%s,%s)
+                    """)
+                values=(uuid.uuid1(),account,"SC","Service Charge",int(10),balance,datetime.datetime.utcnow())
+                cursor.execute(insert_quer,values)
+                connection.commit()
 
 if __name__ == "__main__":
     app.run(debug=True)
+
